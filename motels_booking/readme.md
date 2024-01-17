@@ -1,21 +1,18 @@
-1. 技术选型
-- 使用python+django+mysql作为主要开发工具。
-- python语法简洁，开发效率高，有丰富的开源框架和库可以帮助我们快速搭建web应用。 
-- django是python的免费web应用框架，功能丰富，易于扩展。且文档齐全易于理解。
-- 页面使用django template+bootstrap+jquery。
-- django template类似之前flask使用的jinja2 template,是django默认的模板系统，可以快捷方便的开发web页面。
-- bootstrap+jquery是常见的前端库，用于美化页面和实现动态效果
-2. 架构概述
-- 使用django标准的MTV模式，将应用分为三层
-Model：负责业务对象和数据库的关系映射（ORM），与MVC模式中的Model是等同。
-Template：负责如何把页面展示给用户（HTML），这部分类似与MVC中的视图。
-View：负责业务逻辑，并在适当时候调用Model和Template。跟MVC中的Controller等同。
-3. 数据库设计
-4. 功能实现
-- 用户: 酒店查询，查看酒店详情，查询报价，预定房间，查看预定，取消预定，支付预定。
-- 管理员: 酒店添加、删除、修改。房型添加、删除、修改。 报价策略调整，比如某些地区加价，周末打折之类。
-- 客服: 查看用户预定，取消预定。
-5. 测试
-- 黑盒测试
-- 黑盒通过数据输入观察数据输出，检查软件内部功能是否正常。测试展开时，数据输入软件中，等待数据输出。数据输出时若与预计数据一致，则证明该软件通过测试，若数据与预计数据有出入，即便出入较小亦证明软件程序内部出现问题，需尽快解决。
-- 这个编点吧 加上单元测试也行，稍微写点单元测试也可以
+1. Technical selection
+Use Python+django+MySQL as the main development tool.
+Python has concise syntax, high development efficiency, and rich open-source frameworks and libraries that can help us quickly build web applications.
+Django is a free web application framework for Python, with rich features and easy scalability. The documents are complete and easy to understand.
+The page uses Django template + bootstrap + jQuery.
+The Django template is similar to the jinja2 template used by Flask before and is the default template system for Django, which can quickly and conveniently develop web pages.
+Bootstrap+jquery is a common front-end library used to beautify pages and achieve dynamic effects
+Architecture Overview
+Using the Django standard MTV pattern, the application is divided into three layers of Model: responsible for the relationship mapping (ORM) between business objects and databases, which is equivalent to the Model in the MVC pattern. Template: Responsible for displaying pages to users (HTML), similar to views in MVC. View: Responsible for business logic and calling Model and Template when appropriate. Equivalent to Controller in MVC.
+Database design
+Function implementation
+User: Hotel inquiry, view hotel details, inquire about quotes, book rooms, view reservations, cancel reservations, and pay for reservations.
+Administrator: Add, delete, and modify hotels. Adding, deleting, and modifying room types. Pricing strategy adjustments include price increases in certain regions and weekend discounts.
+Customer service: View user reservations and cancel them.
+test
+Black box testing
+The black box observes data output through data input and checks whether the internal functions of the software are normal. When testing, input data into the software and wait for data output. If the data output is consistent with the expected data, it indicates that the software has passed the test. Suppose there is a discrepancy between the data and the expected data, even if the discrepancy is small. In that case, it indicates an internal problem in the software program that needs to be resolved as soon as possible.
+You can add some unit testing to this, and you can also write some unit testing
