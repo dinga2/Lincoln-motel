@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    index
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="search">
+            <form>
+                <div class="row">
+                    <div class="col-lg-4 search-form">
+                        <input type="text" class="form-control" placeholder="Destination or Hotel Name">
+                    </div>
+                    <div class="col-lg-3 search-form">
+                        <div class="form-group">
+                            <input required="required" type="text" id="daterange" name="daterange"
+                                   placeholder="Select Checkin Checkout"
+                                   class="form-control loon"/>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 search-form dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                                aria-expanded="false"
+                                style="color: #495057; width: 100%;background: white;border: 1px solid #ced4da;">
+                            {{ 1 }} Adults, {{ 1 }} Rooms
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="">
+                                <div class="form-group">
+                                    <label for="adults" class="col-sm-2 col-form-label">Adults</label>
+                                    <div class="col-sm-10">
+                                        <input required="required" type="number" id="adults" name="adults"
+                                               placeholder="adults"
+                                               class="form-control" value="2">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="children" class="col-sm-2 col-form-label">Children</label>
+                                    <div class="col-sm-10">
+
+                                        <input required="required" type="number" id="children" name="children"
+                                               placeholder="children"
+                                               class="form-control loon"
+                                               value="0">
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="room_count" class="col-sm-10 col-form-label">Room Count</label>
+                                    <div class="col-sm-10">
+
+                                        <input required="required" type="number" id="room_count" name="room_count"
+                                               placeholder="room_count"
+                                               class="form-control loon"
+                                               value="1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 search-form">
+                        <button type="button" class="btn btn-primary btn-search">Search</button>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="filter-title">Price per night</div>
+                <div class="form-check filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck1">
+                        < USD 71
+                    </label>
+                </div>
+                <div class="form-check  filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck2">
+                        USD 71-140
+                    </label>
+                </div>
+
+                <div class="form-check  filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck2">
+                        USD 141 - 210
+                    </label>
+                </div>
+
+
+                <div class="form-check  filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck2">
+                        >USD 210
+                    </label>
+                </div>
+
+                <div class="filter-title" style="margin-top: 20px">Property rating</div>
+                <div class="form-check  filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck2">
+                        1 star
+                    </label>
+                </div>
+                <div class="form-check  filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck2">
+                        2 star
+                    </label>
+                </div>
+                <div class="form-check  filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck2">
+                        3 star
+                    </label>
+                </div>
+                <div class="form-check  filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck2">
+                        4 star
+                    </label>
+                </div>
+                <div class="form-check  filter-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label filter-checkbox" for="defaultCheck2">
+                        5 star
+                    </label>
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-9 hotel-list">
+                {% for hotel in hotels %}
+
+                    <div class="card hotel-card">
+                        <div class="row no-gutters" style="height: 180px">
+                            <div class="col-md-4" style="overflow: hidden;">
+                                <img class="hotel-img"
+                                     src="{{ hotel.image }}"
+                                     alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="hotel-title">{{ hotel.name }}</div>
+                                    <div>
+                                        {% for _ in ''|ljust:hotel.star %}
+                                            ⭐️
+                                        {% endfor %}
+
+                                    </div>
+                                    <div class="hotel-content">
+                                        {{ hotel.address }}
+                                    </div>
+
+                                    <div class="hotel-action">
+                                        <div style="position: absolute;bottom: 40px;right: 5px;">
+                                            <span class="currency">USD</span>
+                                            <span class="hotel-price"> 100</span>
+                                        </div>
+                                        <button class="btn btn-primary">Booking Now</button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                var ref = $(this).find("[required=required]");
+                $(ref).each(function () {
+                    if ($(this).val() == '') {
+                        alert("Required field should not be blank.");
+                        $(this).focus();
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+                return true;
+            });
+        });
+        $(function () {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'center',
+                autoUpdateInput: false,
+                locale: {
+                    format: 'YYYY-MM-DD',
+                    cancelLabel: 'Clear'
+                },
+
+            });
+            $('input[name="daterange"]').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+            });
+            $('input[name="daterange"]').on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('');
+            });
+        });
+    </script>
+{% endblock script %}
+
+{% block style %}
+    <style>
+        .filter-checkbox {
+            color: #606266;
+            line-height: 19px;
+            font-size: 14px;
+            padding-left: 5px;
+        }
+
+        .filter-check {
+            padding-bottom: 10px;
+        }
+
+        .filter-title {
+            line-height: 23px;
+            font-size: 18px;
+            padding-bottom: 18px;
+        }
+
+        .search {
+            margin-top: 25px;
+            margin-bottom: 20px;
+        }
+
+        .hotel-card {
+            margin-bottom: 25px;
+            border-radius: 6px;
+        }
+
+        .hotel-title {
+            line-height: 23px;
+            font-size: 17px;
+        }
+
+        .hotel-img {
+            height: 100%;
+            width: 100%;
+            max-height: 180px;
+            border-radius: 6px 0 0 6px;
+        }
+
+        .hotel-content {
+            line-height: 19px;
+            font-size: 14px;
+            color: #686874;
+        }
+
+        .hotel-action {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .hotel-price {
+            color: #e12d2d;
+            font-weight: 650;
+            font-size: 22px;
+
+        }
+
+        .currency {
+            color: #e12d2d;
+            font-weight: 400;
+            font-size: 12px;
+        }
+
+        .search-form {
+            padding-right: 6px;
+            padding-left: 6px;
+        }
+
+        .btn-search {
+            width: 100%;
+        }
+
+        .hotel-list {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
+{% endblock %}
+

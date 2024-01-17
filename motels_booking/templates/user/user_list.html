@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    user manage
+{% endblock %}
+{% block header %}
+    <link rel="stylesheet" href="/static/css/login_findpwd.css">
+{% endblock %}
+
+{% block content %}
+    <a href="{% url "register" %}">
+        <button type="button" class="btn btn-primary">add user</button>
+    </a>
+    <br>
+    <br>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>usernmae</th>
+                <th>email</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th></th>
+            </tr>
+
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <th>{{ user.id }}</th>
+                    <th>{{ user.username }}</th>
+                    <th>{{ user.email }}</th>
+                    <th>{{ user.first_name }}</th>
+                    <th>{{ user.last_name }}</th>
+                    <th>
+                        <button type="button" class="btn btn-primary ch-pwd-btn" data-toggle="modal"
+                                data-target="#myModal">
+                            change password
+                        </button>
+                        <a href="{% url 'user_active' user.id %}">
+                            {% if user.is_active %}
+                                <button type="button" class="btn btn-danger active-btn">close</button>
+                            {% else %}
+                                <button type="button" class="btn btn-success active-btn">open</button>
+
+                            {% endif %}
+                        </a>
+                    </th>
+                </tr>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">change password</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url "update_pwd" user.id %}" method="post">
+                                    {% csrf_token %}
+                                    <p><label for="id_password">passwrod:</label> <input type="password" name="password"
+                                                                                   class="form-control loon reg_pwd"
+                                                                                   maxlength="64"
+                                                                                   minlength="3" required=""
+                                                                                   id="id_password"></p>
+                                    <p><label for="id_re_password">confirm password:</label> <input type="password"
+                                                                                        name="re_password"
+                                                                                        class="form-control loon reg_repwd"
+                                                                                        maxlength="64" minlength="3"
+                                                                                        required=""
+                                                                                        id="id_re_password"></p>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">exit</button>
+                                        <button type="submit" class="btn btn-primary">submit</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}
+
+
+
+{% block style %}
+    <style>
+    </style>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('.ch-pwd-btn').on('shown.bs.modal', function () {
+            $('#myInput').focus()
+        });
+        //$(".ch-pwd-btn").click(function () {
+        //    $.ajax({
+        //        url:{% url "register" %}
+        //    })
+        //})
+    </script>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    hotel_manage
+{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    <div style="margin-bottom: 20px">
+        <ul class="nav justify-content-center nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'hotel_manage_list' %}">Hotel Manage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Price Plan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Dashboard</a>
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <div style="margin-bottom: 15px" class="text-right">
+            <a class="btn btn-success btn-sm" href="{% url 'hotel_manage_add' %}">Add New Hotel</a>
+        </div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">country</th>
+                <th scope="col">address</th>
+                <th scope="col">star</th>
+                <th scope="col">image</th>
+                <th scope="col">action</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for hotel in page.object_list %}
+                <tr>
+                    <th scope="row">{{ hotel.id }}</th>
+                    <td>{{ hotel.name }}</td>
+                    <td>{{ hotel.city.country.name }}</td>
+                    <td>{{ hotel.address }}</td>
+                    <td>{{ hotel.star }}</td>
+
+                    <td>
+                        <div class="hotel-img">
+                            <img src="{{ hotel.image_list.0 }}" alt=""
+                                 class="hotel-img2"
+                            >
+                        </div>
+
+
+                    </td>
+
+                    <td>
+                        <a class="btn-sm btn-primary"
+                           href="{% url 'hotel_manage_detail' hotel.id %}"
+                        >Detail
+                        </a>
+                    </td>
+
+                    <td>
+                        <a class="btn-sm btn-primary">RoomList</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation">
+            <div class="pagination">
+                <ul class="pagination">
+                    {% if page.has_previous %}
+                        {# 判断当前页是否有上一页#}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url 'hotel_manage_list' %}?page = {{ page.previous_page_number }}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span></a></li>
+                    {% endif %}
+
+                    {% for num in page.paginator.page_range %}
+                        {# 循环遍历页码列表，并展示到底部#}
+                        <li class=" page-item {% if num == page.number %}active{% endif %} ">
+                            <a class="page-link" href="{% url 'hotel_manage_list' %}?page={{ num }}"> {{ num }}</a>
+                        </li>
+
+                    {% endfor %}
+
+                    {% if page.has_next %}
+                        {#                                判断当前页是否有下一页#}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url 'hotel_manage_list' %}?page={{ page.next_page_number }}"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+
+    </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+    <style>
+        .hotel-img {
+            width: 100px;
+        }
+
+        .hotel-img2 {
+            width: 100%
+        }
+    </style>
+{% endblock %}
